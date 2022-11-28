@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="VoJ-4L-hpv">
+    <device id="retina6_0" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--FAVORITE-->
+        <scene sceneID="Z13-Ip-4ay">
+            <objects>
+                <viewController id="fJA-Ku-VF8" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="adK-IW-isO">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="uRH-5o-n3T"/>
+                        <color key="backgroundColor" red="0.41529970485583562" green="0.4186484291269002" blue="0.46774384469696972" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="FAVORITE" image="star" catalog="system" id="caw-yf-nwh"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vVt-nx-v0n" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1158" y="284"/>
+        </scene>
+        <!--SEARCH-->
+        <scene sceneID="dF2-ZA-mAf">
+            <objects>
+                <viewController id="8Y0-Mf-9Vq" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="p33-9d-hQZ">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="Uo4-Vw-tJx"/>
+                        <color key="backgroundColor" red="0.41529970485583562" green="0.4186484291269002" blue="0.46774384469696972" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="SEARCH" image="magnifyingglass" catalog="system" id="pcO-dt-bkM"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="IbQ-1y-SK5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1158" y="-323"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="y7U-2J-ukV">
+            <objects>
+                <tabBarController id="VoJ-4L-hpv" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="FyJ-z4-cMr">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" red="0.16191794669939952" green="0.16374928498431818" blue="0.18392913510101006" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="tintColor" red="1" green="0.55721506753073302" blue="0.0020686525413301515" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="barTintColor" red="1" green="0.55721506750000005" blue="0.0020686525409999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="selectedImageTintColor" red="1" green="0.55721506753073302" blue="0.0020686525413301515" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="8Y0-Mf-9Vq" kind="relationship" relationship="viewControllers" id="gJj-s5-hsN"/>
+                        <segue destination="fJA-Ku-VF8" kind="relationship" relationship="viewControllers" id="Ohw-Tg-YzV"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="M6i-DX-SwN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="254" y="-19"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="magnifyingglass" catalog="system" width="128" height="117"/>
+        <image name="star" catalog="system" width="128" height="116"/>
+    </resources>
+</document>
