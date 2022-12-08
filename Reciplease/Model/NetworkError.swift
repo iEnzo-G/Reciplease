@@ -5,4 +5,3 @@ enum NetworkError: Error {
     case invalidResponse
     case undecodableData
 }
-

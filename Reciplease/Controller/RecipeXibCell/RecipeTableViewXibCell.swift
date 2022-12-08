@@ -1,10 +1,3 @@
-//
-//  RecipeTableViewXibCell.swift
-//  Reciplease
-//
-//  Created by Enzo Gammino on 08/12/2022.
-//
-
 import UIKit
 
 class RecipeTableViewXibCell: UITableViewCell {

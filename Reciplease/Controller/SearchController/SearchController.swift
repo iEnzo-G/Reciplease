@@ -4,7 +4,7 @@ class SearchController: UIViewController {
     
     // MARK: - Properties
     
-    var ingredient = Ingredient()
+    private let ingredient = Ingredient()
     private let service = RecipeService()
     
     // MARK: - Outlets
@@ -20,42 +20,29 @@ class SearchController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        ingredient.delegate = self
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard)))
     }
     
     // MARK: - Actions
     
     @IBAction func tappedClearButton(_ sender: UIButton) {
-        searchTextField.text = ""
-        ingredient.list.removeAll()
+        ingredient.clearList()
         ingredientTableView.reloadData()
-        noIngredientLabel.isHidden = false
-    }
-    
-    @IBAction func typedInSearchTextField(_ sender: UITextField) {
-        searchTextField.text = ""
     }
     
     @IBAction func tappedAddButton(_ sender: UIButton) {
-        guard let ingredientText = searchTextField.text, ingredientText != "" else {
-            self.presentAlert(message: "You must first specify a new ingredient.")
-            return
-        }
-        ingredient.list.append(ingredientText)
-        searchTextField.text = ""
-        noIngredientLabel.isHidden = true
+        guard let ingredientText = searchTextField.text else { return }
+        ingredient.addIngredient(ingredientText)
         ingredientTableView.reloadData()
     }
     
     @IBAction func tappedSearchRecipeButton(_ sender: UIButton) {
-        guard !ingredient.list.isEmpty else {
-            self.presentAlert(message: "You must add at least one ingredient first.")
-            return
-        }
-       searchRecipe()
+        ingredient.searchRecipe()
+        recipeRequest()
     }
     
-    private func searchRecipe() {
+    private func recipeRequest() {
         service.request(ingredientList: ingredient.list) { [weak self] result in
             switch result {
             case let .success(item):
@@ -90,6 +77,18 @@ extension SearchController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return ingredient.list.count
     }
+}
+
+extension SearchController: UpdateDelegate {
+    func showEmptyMessage(state: Bool) {
+        noIngredientLabel.isHidden = !state
+    }
     
+    func throwAlert(message: String) {
+        presentAlert(message: message)
+    }
     
+    func updateScreen(ingredientText: String) {
+        searchTextField.text = ingredientText
+    }
 }
