@@ -1,7 +1,7 @@
 # Reciplease
 OpenClassroom - Project 10
 
-You need to create an APIConfig file with inside your APIKey with this syntax :  
+> You need to create an APIConfig file with inside your APIKey with this syntax :  
 
 import Foundation  
 
