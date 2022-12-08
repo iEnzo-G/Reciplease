@@ -6,5 +6,6 @@ target 'Reciplease' do
   use_frameworks!
 
   # Pods for Reciplease
-
+  pod 'Alamofire'
+  
 end

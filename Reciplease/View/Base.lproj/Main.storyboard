@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -27,18 +28,185 @@
         <!--SEARCH-->
         <scene sceneID="dF2-ZA-mAf">
             <objects>
-                <viewController id="8Y0-Mf-9Vq" sceneMemberID="viewController">
+                <viewController id="8Y0-Mf-9Vq" customClass="SearchController" customModule="Reciplease" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="p33-9d-hQZ">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="AFj-Ei-ZEV">
+                                <rect key="frame" x="15" y="76.999999999999986" width="360" height="152.66666666666663"/>
+                                <subviews>
+                                    <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="What's in you fridge ?" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Cwe-R2-ovZ">
+                                        <rect key="frame" x="0.0" y="0.0" width="360" height="41.333333333333336"/>
+                                        <color key="textColor" red="0.16191794670000001" green="0.16374928499999999" blue="0.1839291351" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="29"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="N37-o6-jdq">
+                                        <rect key="frame" x="0.0" y="51.333333333333343" width="360" height="50"/>
+                                        <subviews>
+                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Tomato, chicken, red cabbage..." textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="D7y-rm-3WP">
+                                                <rect key="frame" x="0.0" y="0.0" width="280" height="50"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                <textInputTraits key="textInputTraits" autocorrectionType="yes"/>
+                                                <connections>
+                                                    <action selector="typedInSearchTextField:" destination="8Y0-Mf-9Vq" eventType="editingDidBegin" id="4Xa-j7-RX6"/>
+                                                </connections>
+                                            </textField>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wUI-0h-mZE">
+                                                <rect key="frame" x="290" y="0.0" width="70" height="50"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="70" id="VhE-k6-KJY"/>
+                                                </constraints>
+                                                <color key="tintColor" red="1" green="0.40507582110000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                <state key="normal" title="ADD"/>
+                                                <buttonConfiguration key="configuration" style="plain" title="ADD" cornerStyle="large">
+                                                    <backgroundConfiguration key="background">
+                                                        <color key="backgroundColor" red="0.16191794670000001" green="0.16374928499999999" blue="0.1839291351" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </backgroundConfiguration>
+                                                </buttonConfiguration>
+                                                <connections>
+                                                    <action selector="tappedAddButton:" destination="8Y0-Mf-9Vq" eventType="touchUpInside" id="eTE-Rt-qbr"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="q2l-Ai-Kci"/>
+                                        </constraints>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="rn8-CK-7NL">
+                                        <rect key="frame" x="0.0" y="111.33333333333333" width="360" height="41.333333333333329"/>
+                                        <subviews>
+                                            <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Your ingredients :" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="caw-ly-eyR">
+                                                <rect key="frame" x="0.0" y="0.0" width="261.66666666666669" height="41.333333333333336"/>
+                                                <color key="textColor" red="0.16191794670000001" green="0.16374928499999999" blue="0.1839291351" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="29"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fVm-xJ-pW7">
+                                                <rect key="frame" x="271.66666666666669" y="0.0" width="88.333333333333314" height="41.333333333333336"/>
+                                                <color key="tintColor" red="1" green="0.40507582110000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                <state key="normal" title="ADD"/>
+                                                <buttonConfiguration key="configuration" style="plain" title="CLEAR" cornerStyle="large">
+                                                    <backgroundConfiguration key="background">
+                                                        <color key="backgroundColor" red="0.16191794670000001" green="0.16374928499999999" blue="0.1839291351" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </backgroundConfiguration>
+                                                </buttonConfiguration>
+                                                <connections>
+                                                    <action selector="tappedClearButton:" destination="8Y0-Mf-9Vq" eventType="touchUpInside" id="sBH-Dw-h2R"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gsr-mJ-0CB">
+                                <rect key="frame" x="40" y="701" width="310" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="CdM-KH-Yd6"/>
+                                </constraints>
+                                <color key="tintColor" red="1" green="0.40507582110000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="SEARCH FOR RECIPE" cornerStyle="large">
+                                    <backgroundConfiguration key="background">
+                                        <color key="backgroundColor" red="0.16191794670000001" green="0.16374928499999999" blue="0.1839291351" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </backgroundConfiguration>
+                                    <fontDescription key="titleFontDescription" type="boldSystem" pointSize="26"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="tappedSearchRecipeButton:" destination="8Y0-Mf-9Vq" eventType="touchUpInside" id="x7U-4b-huF"/>
+                                </connections>
+                            </button>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="7oZ-su-Tfq">
+                                <rect key="frame" x="20" y="239.66666666666666" width="350" height="451.33333333333337"/>
+                                <color key="backgroundColor" red="0.41529970490000001" green="0.4186484291" blue="0.46774384470000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="IngredientCell" rowHeight="35" id="GKG-vz-dfr" customClass="IngredientTableViewCell" customModule="Reciplease" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="50" width="350" height="35"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="GKG-vz-dfr" id="miJ-QH-0Gi">
+                                            <rect key="frame" x="0.0" y="0.0" width="350" height="35"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="NEY-ul-pFJ">
+                                                    <rect key="frame" x="0.0" y="0.0" width="350" height="35"/>
+                                                    <subviews>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="keV-fu-RWI">
+                                                            <rect key="frame" x="0.0" y="2.9999999999999982" width="50" height="29.333333333333329"/>
+                                                            <color key="tintColor" red="1" green="0.40507582110000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="50" id="BqV-ZO-zvn"/>
+                                                            </constraints>
+                                                            <imageReference key="image" image="arrow.right" catalog="system" symbolScale="default"/>
+                                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="default"/>
+                                                        </imageView>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tomato" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K5L-fZ-BIE">
+                                                            <rect key="frame" x="50" y="0.0" width="300" height="35"/>
+                                                            <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="20"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                </stackView>
+                                            </subviews>
+                                            <color key="backgroundColor" red="0.41529970490000001" green="0.4186484291" blue="0.46774384470000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <constraints>
+                                                <constraint firstItem="NEY-ul-pFJ" firstAttribute="top" secondItem="miJ-QH-0Gi" secondAttribute="top" id="IJi-QR-YKr"/>
+                                                <constraint firstItem="NEY-ul-pFJ" firstAttribute="leading" secondItem="miJ-QH-0Gi" secondAttribute="leading" id="IuM-Zj-Zt4"/>
+                                                <constraint firstAttribute="trailing" secondItem="NEY-ul-pFJ" secondAttribute="trailing" id="tE8-OS-75a"/>
+                                                <constraint firstAttribute="bottom" secondItem="NEY-ul-pFJ" secondAttribute="bottom" id="yTb-4U-5wc"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="ingredientLabel" destination="K5L-fZ-BIE" id="IQJ-sB-Mhh"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="8Y0-Mf-9Vq" id="6R3-dM-adi"/>
+                                </connections>
+                            </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No added ingredient, try adding some !" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Hw-Yq-cpV">
+                                <rect key="frame" x="15" y="244.66666666666666" width="360" height="441.33333333333337"/>
+                                <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="34"/>
+                                <color key="textColor" red="1" green="0.40507582110000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="Uo4-Vw-tJx"/>
                         <color key="backgroundColor" red="0.41529970485583562" green="0.4186484291269002" blue="0.46774384469696972" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="gsr-mJ-0CB" firstAttribute="leading" secondItem="Uo4-Vw-tJx" secondAttribute="leading" constant="40" id="7hl-3R-bvk"/>
+                            <constraint firstItem="Uo4-Vw-tJx" firstAttribute="bottom" secondItem="gsr-mJ-0CB" secondAttribute="bottom" constant="10" id="Ajz-xD-c3e"/>
+                            <constraint firstItem="gsr-mJ-0CB" firstAttribute="top" secondItem="7oZ-su-Tfq" secondAttribute="bottom" constant="10" id="JR3-4H-btI"/>
+                            <constraint firstItem="AFj-Ei-ZEV" firstAttribute="centerX" secondItem="p33-9d-hQZ" secondAttribute="centerX" id="JzL-61-aaD"/>
+                            <constraint firstItem="7oZ-su-Tfq" firstAttribute="centerX" secondItem="p33-9d-hQZ" secondAttribute="centerX" id="KQv-1d-brk"/>
+                            <constraint firstItem="gsr-mJ-0CB" firstAttribute="centerX" secondItem="p33-9d-hQZ" secondAttribute="centerX" id="bXh-Wp-lCw"/>
+                            <constraint firstItem="2Hw-Yq-cpV" firstAttribute="centerY" secondItem="7oZ-su-Tfq" secondAttribute="centerY" id="fU8-GC-pUO"/>
+                            <constraint firstItem="2Hw-Yq-cpV" firstAttribute="top" secondItem="AFj-Ei-ZEV" secondAttribute="bottom" constant="15" id="gyh-u1-qZT"/>
+                            <constraint firstItem="2Hw-Yq-cpV" firstAttribute="leading" secondItem="p33-9d-hQZ" secondAttribute="leading" constant="15" id="ivl-oF-aX8"/>
+                            <constraint firstItem="2Hw-Yq-cpV" firstAttribute="centerX" secondItem="7oZ-su-Tfq" secondAttribute="centerX" id="oAN-j7-3UH"/>
+                            <constraint firstItem="AFj-Ei-ZEV" firstAttribute="top" secondItem="Uo4-Vw-tJx" secondAttribute="top" constant="30" id="p6x-BX-YEb"/>
+                            <constraint firstItem="7oZ-su-Tfq" firstAttribute="top" secondItem="AFj-Ei-ZEV" secondAttribute="bottom" constant="10" id="q09-hM-3mx"/>
+                            <constraint firstItem="AFj-Ei-ZEV" firstAttribute="leading" secondItem="Uo4-Vw-tJx" secondAttribute="leading" constant="15" id="vqD-Xt-yXn"/>
+                            <constraint firstItem="7oZ-su-Tfq" firstAttribute="leading" secondItem="Uo4-Vw-tJx" secondAttribute="leading" constant="20" id="xD5-KR-k72"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="SEARCH" image="magnifyingglass" catalog="system" id="pcO-dt-bkM"/>
+                    <connections>
+                        <outlet property="addButton" destination="wUI-0h-mZE" id="Rzp-zY-tu4"/>
+                        <outlet property="clearButton" destination="fVm-xJ-pW7" id="5HT-Og-jan"/>
+                        <outlet property="ingredientTableView" destination="7oZ-su-Tfq" id="kjr-MZ-cv3"/>
+                        <outlet property="noIngredientLabel" destination="2Hw-Yq-cpV" id="0hb-Nm-uvW"/>
+                        <outlet property="searchRecipeButton" destination="gsr-mJ-0CB" id="qJd-9l-KRc"/>
+                        <outlet property="searchTextField" destination="D7y-rm-3WP" id="jyf-Hq-C8P"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IbQ-1y-SK5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1158" y="-323"/>
+            <point key="canvasLocation" x="1156.9230769230769" y="-323.45971563981038"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="y7U-2J-ukV">
@@ -63,6 +231,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="arrow.right" catalog="system" width="128" height="95"/>
         <image name="magnifyingglass" catalog="system" width="128" height="117"/>
         <image name="star" catalog="system" width="128" height="116"/>
     </resources>
