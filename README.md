@@ -12,6 +12,4 @@ struct APIConfig {
 
 Don't forget, this is work only for these API :  
  
-https://apilayer.com/marketplace/fixer-api  
-https://www.deepl.com/pro-api?cta=header-pro-api  
-https://openweathermap.org/current  
+https://developer.edamam.com/edamam-docs-recipe-api
