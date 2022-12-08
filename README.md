@@ -10,6 +10,6 @@ OpenClassroom - Project 10
         static let apiKey = "your_apiKey"  
     }
     
-Don't forget, this is work only for these API :  
+> Don't forget, this is work only for these API :  
  
 [Edamam API](https://developer.edamam.com/edamam-docs-recipe-api)
