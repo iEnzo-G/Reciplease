@@ -4,6 +4,8 @@ class SearchController: UIViewController {
     
     // MARK: - Properties
     
+    var recipes: [Hit] = []
+    var nextPage: Next = .init(href: "")
     private let ingredient = Ingredient()
     private let service = RecipeService()
     
@@ -42,11 +44,19 @@ class SearchController: UIViewController {
         recipeRequest()
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let destinationVC = segue.destination as? RecipesController else { return }
+        destinationVC.recipes = recipes
+        destinationVC.nextPage = nextPage
+    }
+    
     private func recipeRequest() {
         service.request(ingredientList: ingredient.list) { [weak self] result in
             switch result {
             case let .success(item):
-                print(item)
+                self?.nextPage = item._links.next
+                self?.recipes = item.hits
+                self?.performSegue(withIdentifier: "RecipeList", sender: nil)
             case .failure:
                 self?.presentAlert(message: "Something happened wrong from the API. Please try later.")
             }
@@ -60,9 +70,10 @@ class SearchController: UIViewController {
 
 // MARK: - Extension
 
-extension SearchController: UITableViewDataSource {
+extension SearchController: UITableViewDataSource, UpdateDelegate {
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "IngredientCell", for: indexPath) as? IngredientTableViewCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "IngredientCell", for: indexPath) as? IngredientCell else {
             return UITableViewCell()
         }
         let list = ingredient.list[indexPath.row]
@@ -77,9 +88,7 @@ extension SearchController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return ingredient.list.count
     }
-}
-
-extension SearchController: UpdateDelegate {
+    
     func showEmptyMessage(state: Bool) {
         noIngredientLabel.isHidden = !state
     }

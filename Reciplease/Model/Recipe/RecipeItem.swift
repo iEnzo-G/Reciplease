@@ -2,6 +2,7 @@ import Foundation
 
 struct RecipeItem: Decodable {
     let hits: [Hit]
+    let _links: Links
 }
 
 struct Hit: Decodable {
@@ -9,14 +10,18 @@ struct Hit: Decodable {
 }
 
 struct Recipe: Decodable {
-    // Recipe name
     let label: String
-    // Image 300px
-    let image: String?
-    // Website for more details
+    let image: String
     let url: String
-    // List of ingredients needed
     let ingredientLines: [String]
-    // Time to cook, maybe minute ?
-    let totalTime: Int?
+    let calories: Double
+    let totalTime: Int
+}
+
+struct Links: Decodable {
+    let next: Next
+}
+
+struct Next: Decodable {
+    let href: String
 }

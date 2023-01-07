@@ -1,7 +1,7 @@
 import UIKit
 
-class IngredientTableViewCell: UITableViewCell {
-
+class IngredientCell: UITableViewCell {
+    
     // MARK: - Outlet
     
     @IBOutlet weak var ingredientLabel: UILabel!
