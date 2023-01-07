@@ -37,9 +37,9 @@ extension RecipesController: UITableViewDataSource, UITableViewDelegate {
         imageRequest(image: currentRecipe.image) { data in
             image = UIImage(data: data)
             cell.configure(
-                timer: self.convertTime(time: currentRecipe.totalTime),
+                timer: currentRecipe.totalTime.convertTime(),
                 image: image,
-                calories: self.convertCalories(calories: currentRecipe.calories))
+                calories: currentRecipe.calories.convertCalories())
         }
         return cell
     }
@@ -58,7 +58,16 @@ extension RecipesController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if indexPath.row == recipesTableView.numberOfRows(inSection: indexPath.section) - 1 {
-            
+            service.requestMore(url: nextPage.href) { [weak self] result in
+                switch result {
+                case let .success(item):
+                    self?.nextPage = item._links.next
+                    self?.recipes.append(contentsOf: item.hits)
+                case .failure:
+                    self?.presentAlert(message: "Something happened wrong from the API. Please try later.")
+                }
+            }
+            recipesTableView.reloadData()
         }
     }
 }

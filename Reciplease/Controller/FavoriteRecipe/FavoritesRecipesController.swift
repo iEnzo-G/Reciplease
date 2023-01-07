@@ -28,7 +28,6 @@ class FavoritesRecipesController: UIViewController {
         let currentRecipe = recipes[selectedIndexPath]
         destinationVC.recipes.append(currentRecipe)
     }
-    
     private func getRecipes() {
         let recipesFromCoreData = coreDataStack.getRecipes()
         recipes = recipesFromCoreData.map { recipe in
@@ -47,9 +46,9 @@ extension FavoritesRecipesController: UITableViewDataSource, UITableViewDelegate
         imageRequest(image: currentRecipe.image) { data in
             image = UIImage(data: data)
             cell.configure(
-                timer: self.convertTime(time: currentRecipe.totalTime),
+                timer: currentRecipe.totalTime.convertTime(),
                 image: image,
-                calories: self.convertCalories(calories: currentRecipe.calories))
+                calories: currentRecipe.calories.convertCalories())
         }
         return cell
     }

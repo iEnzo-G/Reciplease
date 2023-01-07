@@ -6,7 +6,6 @@ class RecipeDetailController: UIViewController {
     var recipes: [Hit] = []
     let coreDataStack = CoreDataStack()
     
-    
     // MARK: - Outlet
     
     @IBOutlet weak var recipeImageView: UIImageView!
@@ -16,6 +15,7 @@ class RecipeDetailController: UIViewController {
     @IBOutlet weak var moreDetailButton: UIButton!
     @IBOutlet weak var ingredientDetailTableView: UITableView!
     
+    
     // MARK: - View life cycle
     
     override func viewDidLoad() {
@@ -23,22 +23,16 @@ class RecipeDetailController: UIViewController {
         updateFavoriteButton()
         
         let currentRecipe = recipes[0].recipe
-        timerTextField.text = convertTime(time: currentRecipe.totalTime)
-        calorieTextField.text = convertCalories(calories: currentRecipe.calories)
+        timerTextField.text = currentRecipe.totalTime.convertTime()
+        calorieTextField.text = currentRecipe.calories.convertCalories()
         imageRequest(image: currentRecipe.image) { imageData in
             self.recipeImageView.image = UIImage(data: imageData)
-            
         }
     }
     
     @IBAction func tappedFavoriteButton(_ sender: UIButton) {
         let currentRecipe = recipes[0].recipe
-        if coreDataStack.checkRecipeExists(url: currentRecipe.url) == false {
-            coreDataStack.saveRecipe(currentRecipe)
-        }
-        else {
-            coreDataStack.deleteRecipe(currentRecipe)
-        }
+        coreDataStack.checkRecipeExists(url: currentRecipe.url) == false ? coreDataStack.saveRecipe(currentRecipe) : coreDataStack.deleteRecipe(currentRecipe)
         updateFavoriteButton()
     }
     

@@ -1,12 +1,12 @@
 import Foundation
 
-class Ingredient {
+final class Ingredient {
     
     // MARK: - Properties
     
     var list: [String] = []
     weak var delegate: UpdateDelegate?
-    var ingredientText: String = "" {
+    private var ingredientText: String = "" {
         didSet {
             delegate?.updateScreen(ingredientText: ingredientText)
         }

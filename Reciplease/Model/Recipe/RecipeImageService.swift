@@ -1,6 +1,6 @@
 import Foundation
 
-class RecipeImageService {
+final class RecipeImageService {
     
     private let httpClient: HTTPClient
     
