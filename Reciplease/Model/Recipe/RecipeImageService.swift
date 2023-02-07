@@ -10,12 +10,16 @@ final class RecipeImageService {
     
     func request(image: String, completion: @escaping (Result<Data, Error>) -> Void) {
         guard let url = URL(string: image) else { return }
-        httpClient.request(from: url, completion: { data, response in
-            guard let data = data, response?.statusCode == 200 else {
-                completion(.failure(NetworkError.noData))
-                return
+        httpClient.request(from: url, completion: { result in
+            switch result {
+            case let .success((data, _)):
+                completion(.success(data))
+            case let .failure(error):
+                completion(.failure(error))
             }
-            completion(.success(data))
         })
     }
 }
+
+
+

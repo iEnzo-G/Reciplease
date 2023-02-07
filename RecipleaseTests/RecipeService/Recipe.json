@@ -1,0 +1,22 @@
+{
+    "from": 1,
+    "to": 20,
+    "count": 10000,
+    "_links": {
+        "next": {
+            "href": "https://api.edamam.com/api/recipes/v2?q=tomato&app_key=9cf06adc6f359136470419eebf3d011e&_cont=CHcVQBtNNQphDmgVQntAEX4BYlFtAgsORWZIAGcaY1N6DAECUXlSCmJFalZ3AgIPQzZBBGZHYVF0UlJTFWdDVmBBYlxyB1IVLnlSVSBMPkd5BgMbUSYRVTdgMgksRlpSAAcRXTVGcV84SU4%3D&type=public&app_id=e982b0f1",
+            "title": "Next page"
+        }
+    },
+    "hits": [
+        {
+            "recipe": {
+                "label": "Tomato Gravy",
+                "image": "image",
+                "url" : "url",
+                "ingredientLines": ["Tomato"],
+                "calories": 2,
+                "totalTime": 5
+            }
+        }],
+}

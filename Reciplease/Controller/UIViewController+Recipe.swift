@@ -20,8 +20,6 @@ extension Int {
         let minutesString = remainingMinutes == 0 ? "" : "\(remainingMinutes)min"
         return self > 60 ? "\(hours)h \(minutesString)" : "\(self)min"
     }
-    
-    
 }
 
 extension UIViewController {

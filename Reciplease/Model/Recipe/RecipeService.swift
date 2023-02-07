@@ -9,16 +9,18 @@ final class RecipeService {
     }
     
     private func baseRequest(url: URL, completion: @escaping (Result<RecipeItem, Error>) -> Void) {
-        httpClient.request(from: url, completion: { data, response in
-            guard let data = data, let response = response else {
-                completion(.failure(NetworkError.noData))
-                return
-            }
-            do {
-                completion(.success(try RecipeMapper.map(data: data, response: response)))
-            }
-            catch {
-                completion(.failure(NetworkError.undecodableData))
+        httpClient.request(from: url, completion: { result in
+            switch result {
+            case let .success((data, response)):
+                do {
+                    completion(.success(try RecipeMapper.map(data: data, response: response)))
+                }
+                catch {
+                    completion(.failure(error))
+                }
+                
+            case let .failure(error):
+                completion(.failure(error))
             }
         })
     }

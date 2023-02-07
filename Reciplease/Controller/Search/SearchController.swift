@@ -4,9 +4,9 @@ class SearchController: UIViewController {
     
     // MARK: - Properties
     
-    var recipes: [Hit] = []
-    var nextPage: Next = .init(href: "")
-    private let ingredient = Ingredient()
+    private var recipes: [Hit] = []
+    private var nextPage: Next = .init(href: "")
+    private let ingredient = IngredientsStore()
     private let service = RecipeService()
     
     // MARK: - Outlets
@@ -16,15 +16,21 @@ class SearchController: UIViewController {
     @IBOutlet weak var searchTextField: UITextField!
     @IBOutlet weak var clearButton: UIButton!
     @IBOutlet weak var addButton: UIButton!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var ingredientTableView: UITableView!
     
     // MARK: - View life cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        ingredientTableView.isAccessibilityElement = true
+        ingredientTableView.accessibilityValue = "List of ingredient added available in your fridge"
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.color = .white
         ingredient.delegate = self
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard)))
     }
+    
     
     // MARK: - Actions
     
@@ -41,6 +47,8 @@ class SearchController: UIViewController {
     
     @IBAction func tappedSearchRecipeButton(_ sender: UIButton) {
         ingredient.searchRecipe()
+        searchRecipeButton.isHidden = true
+        activityIndicator.startAnimating()
         recipeRequest()
     }
     
@@ -51,13 +59,17 @@ class SearchController: UIViewController {
     }
     
     private func recipeRequest() {
-        service.request(ingredientList: ingredient.list) { [weak self] result in
+        service.request(ingredientList: ingredient.ingredients) { [weak self] result in
             switch result {
             case let .success(item):
                 self?.nextPage = item._links.next
                 self?.recipes = item.hits
+                self?.activityIndicator.stopAnimating()
+                self?.searchRecipeButton.isHidden = false
                 self?.performSegue(withIdentifier: "RecipeList", sender: nil)
             case .failure:
+                self?.activityIndicator.stopAnimating()
+                self?.searchRecipeButton.isHidden = false
                 self?.presentAlert(message: "Something happened wrong from the API. Please try later.")
             }
         }
@@ -76,7 +88,7 @@ extension SearchController: UITableViewDataSource, UpdateDelegate {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "IngredientCell", for: indexPath) as? IngredientCell else {
             return UITableViewCell()
         }
-        let list = ingredient.list[indexPath.row]
+        let list = ingredient.ingredients[indexPath.row]
         cell.configure(title: list)
         return cell
     }
@@ -86,7 +98,7 @@ extension SearchController: UITableViewDataSource, UpdateDelegate {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return ingredient.list.count
+        return ingredient.ingredients.count
     }
     
     func showEmptyMessage(state: Bool) {

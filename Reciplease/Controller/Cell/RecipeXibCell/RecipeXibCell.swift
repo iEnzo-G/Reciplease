@@ -2,8 +2,6 @@ import UIKit
 
 class RecipeXibCell: UITableViewCell {
     
-    // MARK: - Outlets
-    
     @IBOutlet weak var caloriesTextField: UITextField!
     @IBOutlet weak var timerTextField: UITextField!
     @IBOutlet weak var recipeImageView: UIImageView!
@@ -19,5 +17,4 @@ class RecipeXibCell: UITableViewCell {
         self.layer.borderWidth = 2
         self.layer.borderColor = UIColor(red: 48/255, green: 79/255, blue: 102/255, alpha: 1.0).cgColor
     }
-    
 }

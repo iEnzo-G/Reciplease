@@ -3,12 +3,13 @@ import CoreData
 
 class RecipeDetailController: UIViewController {
     
-    var recipes: [Hit] = []
-    let coreDataStack = CoreDataStack()
+    private let coreDataStore = CoreDataStore()
+    var recipe = Recipe(label: "", image: "", url: "", ingredientLines: [""], calories: 0, totalTime: 0)
     
     // MARK: - Outlet
     
     @IBOutlet weak var recipeImageView: UIImageView!
+    @IBOutlet weak var recipeNameLabel: UILabel!
     @IBOutlet weak var calorieTextField: UITextField!
     @IBOutlet weak var favoriteButton: UIButton!
     @IBOutlet weak var timerTextField: UITextField!
@@ -21,32 +22,37 @@ class RecipeDetailController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         updateFavoriteButton()
-        
-        let currentRecipe = recipes[0].recipe
-        timerTextField.text = currentRecipe.totalTime.convertTime()
-        calorieTextField.text = currentRecipe.calories.convertCalories()
-        imageRequest(image: currentRecipe.image) { imageData in
-            self.recipeImageView.image = UIImage(data: imageData)
+        ingredientDetailTableView.isAccessibilityElement = true
+        ingredientDetailTableView.accessibilityTraits = .staticText
+        ingredientDetailTableView.accessibilityValue = 	recipe.ingredientLines.joined(separator: " ,")
+        ingredientDetailTableView.accessibilityHint = "List of ingredients you need to make the recipe"
+        recipeNameLabel.text = recipe.label
+        timerTextField.text = recipe.totalTime.convertTime()
+        calorieTextField.text = recipe.calories.convertCalories()
+        imageRequest(image: recipe.image) { [weak self] imageData in
+            self?.recipeImageView.image = UIImage(data: imageData)
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        updateFavoriteButton()
+    }
+    
+    // MARK: - Actions
+    
     @IBAction func tappedFavoriteButton(_ sender: UIButton) {
-        let currentRecipe = recipes[0].recipe
-        coreDataStack.checkRecipeExists(url: currentRecipe.url) == false ? coreDataStack.saveRecipe(currentRecipe) : coreDataStack.deleteRecipe(currentRecipe)
+        coreDataStore.checkRecipeExists(url: recipe.url) == false ? coreDataStore.saveRecipe(recipe) : coreDataStore.deleteRecipe(recipe)
         updateFavoriteButton()
     }
     
     @IBAction func tappedMoreDetailButton(_ sender: UIButton) {
-        guard let url = URL(string: recipes[0].recipe.url) else { return }
+        guard let url = URL(string: recipe.url) else { return }
         UIApplication.shared.open(url)
     }
     
     func updateFavoriteButton() {
-        let currentRecipe = recipes[0].recipe
-        favoriteButton.tintColor = coreDataStack.checkRecipeExists(url: currentRecipe.url) == true ? .systemGreen : .systemRed
+        favoriteButton.tintColor = coreDataStore.checkRecipeExists(url: recipe.url) == true ? .systemGreen : .systemRed
     }
-    
-    
 }
 
 // MARK: - Extension
@@ -54,12 +60,12 @@ class RecipeDetailController: UIViewController {
 extension RecipeDetailController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return recipes[0].recipe.ingredientLines.count
+        return recipe.ingredientLines.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "IngredientDetailCell", for: indexPath)
-        let currentIngredient = recipes[0].recipe.ingredientLines[indexPath.row]
+        let currentIngredient = recipe.ingredientLines[indexPath.row]
         cell.textLabel?.text = currentIngredient
         return cell
     }

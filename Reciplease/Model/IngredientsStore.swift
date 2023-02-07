@@ -1,12 +1,12 @@
 import Foundation
 
-final class Ingredient {
+final class IngredientsStore {
     
     // MARK: - Properties
     
-    var list: [String] = []
+    var ingredients: [String] = []
     weak var delegate: UpdateDelegate?
-    private var ingredientText: String = "" {
+    var ingredientText: String = "" {
         didSet {
             delegate?.updateScreen(ingredientText: ingredientText)
         }
@@ -19,24 +19,24 @@ final class Ingredient {
             delegate?.throwAlert(message: "You must first specify a new ingredient.")
             return
         }
-        guard !list.contains(ingredient) else {
+        guard !ingredients.contains(ingredient) else {
             delegate?.throwAlert(message: "You have already add this ingredient.")
             return
         }
-        list.append(ingredient)
+        ingredients.append(ingredient)
         delegate?.showEmptyMessage(state: false)
         delegate?.updateScreen(ingredientText: "")
     }
     
     func searchRecipe() {
-        guard !list.isEmpty else {
+        guard !ingredients.isEmpty else {
             delegate?.throwAlert(message: "You must add at least one ingredient first.")
             return
         }
     }
     
     func clearList() {
-        list.removeAll()
+        ingredients.removeAll()
         delegate?.showEmptyMessage(state: true)
     }
 }

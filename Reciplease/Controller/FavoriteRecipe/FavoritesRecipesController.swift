@@ -2,12 +2,13 @@ import UIKit
 
 class FavoritesRecipesController: UIViewController {
     
-    private var recipes: [Hit] = []
-    private let coreDataStack = CoreDataStack()
+    var recipes: [Recipe] = []
+    private let coreDataStore = CoreDataStore()
     
     @IBOutlet weak var noRecipesLabel: UILabel!
     @IBOutlet weak var recipesTableView: UITableView!
     
+    // MARK: - View life cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -16,8 +17,13 @@ class FavoritesRecipesController: UIViewController {
         noRecipesLabel.isHidden = recipes.isEmpty ? false : true
     }
     
+    // MARK: - Properties
+    
     override func viewWillAppear(_ animated: Bool) {
         getRecipes()
+        recipesTableView.isAccessibilityElement = true
+        recipesTableView.accessibilityValue = "Contains \(recipes.count) recipes displayed"
+        recipesTableView.accessibilityHint = "List of your favorites recipes"
         recipesTableView.reloadData()
         noRecipesLabel.isHidden = recipes.isEmpty ? false : true
     }
@@ -26,22 +32,20 @@ class FavoritesRecipesController: UIViewController {
         guard let destinationVC = segue.destination as? RecipeDetailController, let selectedCell = sender as? UITableViewCell else { return }
         guard let selectedIndexPath = recipesTableView.indexPath(for: selectedCell)?.row else { return }
         let currentRecipe = recipes[selectedIndexPath]
-        destinationVC.recipes.append(currentRecipe)
+        destinationVC.recipe = currentRecipe
     }
     private func getRecipes() {
-        let recipesFromCoreData = coreDataStack.getRecipes()
-        recipes = recipesFromCoreData.map { recipe in
-            let hits = Hit(recipe: recipe)
-            return hits
-        }
+        recipes = coreDataStore.getRecipes()
     }
 }
+
+// MARK: - Extension
 
 extension FavoritesRecipesController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "RecipeXibCell", for: indexPath) as? RecipeXibCell else { return UITableViewCell() }
-        let currentRecipe = recipes[indexPath.row].recipe
+        let currentRecipe = recipes[indexPath.row]
         var image: UIImage?
         imageRequest(image: currentRecipe.image) { data in
             image = UIImage(data: data)

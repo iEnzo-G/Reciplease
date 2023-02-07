@@ -17,50 +17,40 @@
                 <rect key="frame" x="0.0" y="0.0" width="322" height="80"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="default_image" translatesAutoresizingMaskIntoConstraints="NO" id="cWr-rK-2ei">
-                        <rect key="frame" x="0.0" y="0.0" width="322" height="100"/>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default_image" translatesAutoresizingMaskIntoConstraints="NO" id="cWr-rK-2ei">
+                        <rect key="frame" x="0.0" y="0.0" width="322" height="80"/>
                     </imageView>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q3q-A6-2CL">
                         <rect key="frame" x="222" y="20" width="80" height="40"/>
                         <subviews>
-                            <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="1024 cal" textAlignment="center" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="vaz-86-y9K">
-                                <rect key="frame" x="1" y="1" width="78" height="17.666666666666668"/>
-                                <color key="backgroundColor" red="0.097368679089999993" green="0.160651874" blue="0.2093592172" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="15"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Ql7-LM-E7y">
-                                <rect key="frame" x="1" y="18.666666666666664" width="78" height="20.333333333333336"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="7fC-0Q-Jw7">
+                                <rect key="frame" x="1" y="1" width="78" height="38"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="timer" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="0BS-vH-qgT">
-                                        <rect key="frame" x="0.0" y="0.99999999999999822" width="20" height="19"/>
-                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="20" id="kai-hF-DqZ"/>
-                                        </constraints>
-                                    </imageView>
-                                    <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="leading" contentVerticalAlignment="center" text="25mn" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="LJL-bT-hdu">
-                                        <rect key="frame" x="25" y="0.0" width="53" height="20.333333333333332"/>
+                                    <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="center" contentVerticalAlignment="center" text="1024 cal" textAlignment="center" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="vaz-86-y9K">
+                                        <rect key="frame" x="0.0" y="0.0" width="78" height="19"/>
+                                        <color key="backgroundColor" red="0.097368679089999993" green="0.160651874" blue="0.2093592172" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="20"/>
+                                        <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="15"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="center" contentVerticalAlignment="center" text="25mn" textAlignment="center" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="LJL-bT-hdu">
+                                        <rect key="frame" x="0.0" y="19" width="78" height="18.999999999999993"/>
+                                        <color key="backgroundColor" red="0.097368679089999993" green="0.160651874" blue="0.2093592172" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="15"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                 </subviews>
-                                <color key="backgroundColor" red="0.097368679089999993" green="0.160651874" blue="0.2093592172" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="Ql7-LM-E7y" firstAttribute="top" secondItem="vaz-86-y9K" secondAttribute="bottom" id="CGu-kQ-ODr"/>
-                            <constraint firstAttribute="trailing" secondItem="Ql7-LM-E7y" secondAttribute="trailing" constant="1" id="Joa-pO-WbI"/>
-                            <constraint firstAttribute="trailing" secondItem="vaz-86-y9K" secondAttribute="trailing" constant="1" id="VHw-sN-0vM"/>
+                            <constraint firstItem="7fC-0Q-Jw7" firstAttribute="leading" secondItem="q3q-A6-2CL" secondAttribute="leading" constant="1" id="0Jd-vT-ZhV"/>
+                            <constraint firstItem="7fC-0Q-Jw7" firstAttribute="top" secondItem="q3q-A6-2CL" secondAttribute="top" constant="1" id="AzV-rU-PtY"/>
+                            <constraint firstAttribute="bottom" secondItem="7fC-0Q-Jw7" secondAttribute="bottom" constant="1" id="SMK-eY-jky"/>
                             <constraint firstAttribute="width" constant="80" id="Wg3-BE-zFu"/>
+                            <constraint firstAttribute="trailing" secondItem="7fC-0Q-Jw7" secondAttribute="trailing" constant="1" id="edy-2F-06w"/>
                             <constraint firstAttribute="height" constant="40" id="hCT-bB-lDE"/>
-                            <constraint firstItem="vaz-86-y9K" firstAttribute="top" secondItem="q3q-A6-2CL" secondAttribute="top" constant="1" id="hOZ-Z5-DtY"/>
-                            <constraint firstItem="Ql7-LM-E7y" firstAttribute="leading" secondItem="q3q-A6-2CL" secondAttribute="leading" constant="1" id="qeg-jm-cTZ"/>
-                            <constraint firstAttribute="bottom" secondItem="Ql7-LM-E7y" secondAttribute="bottom" constant="1" id="snF-rX-etZ"/>
-                            <constraint firstItem="vaz-86-y9K" firstAttribute="leading" secondItem="q3q-A6-2CL" secondAttribute="leading" constant="1" id="uyK-yZ-XbV"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -85,6 +75,5 @@
     </objects>
     <resources>
         <image name="default_image" width="300" height="300"/>
-        <image name="timer" catalog="system" width="128" height="123"/>
     </resources>
 </document>
